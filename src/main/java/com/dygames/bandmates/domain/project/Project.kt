@@ -23,4 +23,3 @@ class Project(
     @Embedded
     val tracks: Tracks = Tracks()
 )
-

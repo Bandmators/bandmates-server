@@ -1,7 +1,7 @@
-package com.dygames.bandmates.domain.project
+package com.dygames.bandmates.domain.audio
 
+import jakarta.persistence.Column
 import jakarta.persistence.DiscriminatorColumn
-import jakarta.persistence.DiscriminatorValue
 import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
@@ -12,18 +12,9 @@ import jakarta.persistence.InheritanceType
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "audio_type")
-interface Audio {
-    @get:Id
-    @get:GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long
-}
-
-@Entity
-@DiscriminatorValue("MIDI")
-class MIDIAudio(
+abstract class Audio {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    override val id: Long = 0
-) : Audio {
-
+    @Column(name = "AUDIO_ID")
+    open val id: Long = 0
 }

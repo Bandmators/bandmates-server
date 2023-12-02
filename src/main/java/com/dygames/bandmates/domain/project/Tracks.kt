@@ -7,6 +7,5 @@ import jakarta.persistence.OneToMany
 @Embeddable
 class Tracks(
     @OneToMany
-    @JoinColumn(name = "PROJECT_ID")
     val tracks: List<Track> = emptyList()
 )

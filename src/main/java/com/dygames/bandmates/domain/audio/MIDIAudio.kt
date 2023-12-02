@@ -1,18 +1,15 @@
-package com.dygames.bandmates.domain.project
+package com.dygames.bandmates.domain.audio
 
-import jakarta.persistence.Column
+import jakarta.persistence.DiscriminatorValue
 import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 
-
 @Entity
-class User(
+@DiscriminatorValue("MIDI")
+class MIDIAudio(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "USER_ID")
-    val id: Long = 0,
-    val name: String = "",
-    val email: String = ""
-)
+    override val id: Long = 0
+) : Audio()
