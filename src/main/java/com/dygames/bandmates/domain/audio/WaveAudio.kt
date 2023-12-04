@@ -7,8 +7,8 @@ import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 
 @Entity
-@DiscriminatorValue("MIDI")
-class MIDIAudio(
+@DiscriminatorValue("Wave")
+class WaveAudio(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     override val id: Long

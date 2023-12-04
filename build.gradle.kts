@@ -3,6 +3,8 @@ plugins {
     id("org.springframework.boot") version "3.1.5"
     id("io.spring.dependency-management") version "1.1.3"
     id("org.jetbrains.kotlin.jvm") version "1.9.20"
+    kotlin("plugin.noarg") version "1.9.20"
+    kotlin("plugin.allopen") version "1.9.20"
 }
 
 group = "com.dygames"
@@ -31,4 +33,12 @@ tasks.withType<Test> {
 
 kotlin {
     jvmToolchain(17)
+}
+
+allOpen {
+    annotation("javax.persistence.Entity")
+}
+
+noArg {
+    annotation("javax.persistence.Entity")
 }

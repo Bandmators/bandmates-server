@@ -7,5 +7,5 @@ import jakarta.persistence.OneToMany
 @Embeddable
 class Tracks(
     @OneToMany
-    val tracks: List<Track> = emptyList()
+    val tracks: List<Track>
 )

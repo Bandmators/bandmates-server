@@ -15,13 +15,13 @@ class Track(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "TRACK_ID")
-    val id: Long = 0,
+    val id: Long,
 
     @OneToOne
     @JoinColumn(name = "AUDIO_ID")
-    val audio: Audio = MIDIAudio(),
+    val audio: Audio,
 
     @OneToOne
     @JoinColumn(name = "USER_ID")
-    val author: User = User()
+    val author: User
 )
