@@ -14,12 +14,13 @@ class Project(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "PROJECT_ID")
-    val id: Long,
+    val id: Long = 0,
 
     @OneToOne
     @JoinColumn(name = "USER_ID")
-    val author: User,
+    val author: User = User(0, "", ""),
 
     @Embedded
-    val tracks: Tracks
+    @JoinColumn(name = "TRACKS_ID")
+    val tracks: Tracks = Tracks(emptyList())
 )

@@ -1,4 +1,15 @@
 package com.dygames.bandmates.service.dto
 
-class TracksResponse {
+import com.dygames.bandmates.domain.project.Tracks
+
+data class TracksResponse(
+    val value: List<TrackResponse>
+) {
+    companion object {
+        fun of(tracks: Tracks) = tracks.tracks.map {
+            TrackResponse.of(it)
+        }.let {
+            TracksResponse(it)
+        }
+    }
 }
