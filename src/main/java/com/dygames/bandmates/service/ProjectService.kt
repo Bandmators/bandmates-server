@@ -9,22 +9,34 @@ import com.dygames.bandmates.service.dto.ProjectsResponse
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
-@Service
 @Transactional
-open class ProjectService(
+@Service
+class ProjectService(
     private val projectRepository: ProjectRepository
 ) {
 
     @Transactional
-    fun create(request: ProjectRequest) {
-        val project = Project(0, User(0, "", ""), Tracks(emptyList()))
+    fun create(userId: Long, request: ProjectRequest) {
+        val project = Project(
+            0,
+            author = User(
+                userId,
+                request.author.name,
+                request.author.email
+            ),
+            tracks = Tracks(emptyList())
+        )
         projectRepository.save(project)
     }
 
     @Transactional
     fun findAll(): ProjectsResponse {
-        return ProjectsResponse.of(
-            projectRepository.findAll()
-        )
+        val projects = projectRepository.findAll()
+        return ProjectsResponse.of(projects)
+    }
+
+    @Transactional
+    fun delete(id: Long) {
+        projectRepository.deleteById(id)
     }
 }

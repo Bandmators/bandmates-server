@@ -4,18 +4,19 @@ import com.dygames.bandmates.domain.project.Project
 import com.dygames.bandmates.domain.project.Tracks
 import com.dygames.bandmates.domain.project.User
 import com.dygames.bandmates.service.ProjectService
+import com.dygames.bandmates.service.dto.ProjectRequest
 import com.dygames.bandmates.service.dto.ProjectsResponse
-import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.databind.ObjectMapper
-import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import org.mockito.BDDMockito.given
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.boot.test.mock.mockito.MockBean
+import org.springframework.http.HttpHeaders
 import org.springframework.http.MediaType
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.content
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
@@ -45,5 +46,22 @@ class ProjectControllerTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(jsonPath("$.value[0].id").value("0"))
             .andExpect(jsonPath("$.value[0].author").value(""))
+    }
+
+    @Test
+    fun 프로젝트를_생성한다() {
+        val sut = Project(0, User(0, "", ""), Tracks(emptyList()))
+
+        val body: String = ObjectMapper().writeValueAsString(
+            ProjectRequest.of(sut)
+        )
+        println(body)
+
+        mvc.perform(
+            post("/projects")
+                .header(HttpHeaders.AUTHORIZATION, "2")
+                .content(body).contentType(MediaType.APPLICATION_JSON)
+        )
+            .andExpect(status().isCreated)
     }
 }

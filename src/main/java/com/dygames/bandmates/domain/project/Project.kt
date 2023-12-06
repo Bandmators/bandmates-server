@@ -7,7 +7,7 @@ import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 import jakarta.persistence.JoinColumn
-import jakarta.persistence.OneToOne
+import jakarta.persistence.ManyToOne
 
 @Entity
 class Project(
@@ -16,7 +16,7 @@ class Project(
     @Column(name = "PROJECT_ID")
     val id: Long = 0,
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "USER_ID")
     val author: User = User(0, "", ""),
 
