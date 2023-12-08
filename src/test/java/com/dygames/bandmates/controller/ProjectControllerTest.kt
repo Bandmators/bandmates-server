@@ -32,7 +32,7 @@ class ProjectControllerTest {
 
     @Test
     fun 모든_프로젝트를_가져온다() {
-        val sut = Project(0, User(0, "", ""), Tracks(emptyList()))
+        val sut = Project(User("", ""), User("", ""), Tracks(emptyList()))
 
         given(projectService.findAll())
             .willReturn(
@@ -50,15 +50,30 @@ class ProjectControllerTest {
 
     @Test
     fun 프로젝트를_생성한다() {
-        val sut = Project(0, User(0, "", ""), Tracks(emptyList()))
+        val sut = Project(User("", ""), User("", ""), Tracks(emptyList()))
 
         val body: String = ObjectMapper().writeValueAsString(
             ProjectRequest.of(sut)
         )
-        println(body)
 
         mvc.perform(
             post("/projects")
+                .header(HttpHeaders.AUTHORIZATION, "2")
+                .content(body).contentType(MediaType.APPLICATION_JSON)
+        )
+            .andExpect(status().isCreated)
+    }
+
+    @Test
+    fun 프로젝트를_포크한다() {
+        val sut = Project(User("", ""), User("", ""), Tracks(emptyList()))
+
+        val body: String = ObjectMapper().writeValueAsString(
+            ProjectRequest.of(sut)
+        )
+
+        mvc.perform(
+            post("/projects/fork/1")
                 .header(HttpHeaders.AUTHORIZATION, "2")
                 .content(body).contentType(MediaType.APPLICATION_JSON)
         )

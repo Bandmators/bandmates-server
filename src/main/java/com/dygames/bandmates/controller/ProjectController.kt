@@ -20,6 +20,11 @@ class ProjectController(
     private val projectService: ProjectService
 ) {
 
+    @GetMapping
+    fun findAll(): ResponseEntity<ProjectsResponse> {
+        return ResponseEntity.ok().body(projectService.findAll())
+    }
+
     @PostMapping
     fun create(
         @RequestHeader(value = "Authorization") userId: Long,
@@ -29,16 +34,20 @@ class ProjectController(
         return ResponseEntity.status(HttpStatus.CREATED).build()
     }
 
-    @GetMapping
-    fun findAll(): ResponseEntity<ProjectsResponse> {
-        return ResponseEntity.ok().body(projectService.findAll())
-    }
-
     @DeleteMapping("/{projectId}")
     fun delete(
         @PathVariable projectId: Long,
     ): ResponseEntity<Unit> {
         projectService.delete(projectId)
         return ResponseEntity.ok().build()
+    }
+
+    @PostMapping("/fork/{projectId}")
+    fun fork(
+        @RequestHeader(value = "Authorization") userId: Long,
+        @PathVariable projectId: Long
+    ): ResponseEntity<Unit> {
+        projectService.fork(userId, projectId)
+        return ResponseEntity.status(HttpStatus.CREATED).build()
     }
 }

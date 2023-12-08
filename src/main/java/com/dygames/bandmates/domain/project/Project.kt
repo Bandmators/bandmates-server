@@ -1,26 +1,22 @@
 package com.dygames.bandmates.domain.project
 
-import jakarta.persistence.Column
+import com.dygames.bandmates.domain.BaseEntity
 import jakarta.persistence.Embedded
 import jakarta.persistence.Entity
-import jakarta.persistence.GeneratedValue
-import jakarta.persistence.GenerationType
-import jakarta.persistence.Id
 import jakarta.persistence.JoinColumn
 import jakarta.persistence.ManyToOne
 
 @Entity
 class Project(
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "PROJECT_ID")
-    val id: Long = 0,
+    @ManyToOne
+    @JoinColumn(name = "AUTHOR_ID")
+    val author: User,
 
     @ManyToOne
-    @JoinColumn(name = "USER_ID")
-    val author: User = User(0, "", ""),
+    @JoinColumn(name = "OWNER_ID")
+    val owner: User,
 
     @Embedded
     @JoinColumn(name = "TRACKS_ID")
-    val tracks: Tracks = Tracks(emptyList())
-)
+    val tracks: Tracks
+) : BaseEntity()
