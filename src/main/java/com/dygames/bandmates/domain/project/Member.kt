@@ -4,7 +4,7 @@ import com.dygames.bandmates.domain.BaseEntity
 import jakarta.persistence.Entity
 
 @Entity
-class User(
+class Member(
     val name: String,
     val email: String
 ) : BaseEntity()

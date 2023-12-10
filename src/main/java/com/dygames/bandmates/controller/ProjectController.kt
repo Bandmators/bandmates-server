@@ -1,7 +1,6 @@
 package com.dygames.bandmates.controller
 
 import com.dygames.bandmates.service.ProjectService
-import com.dygames.bandmates.service.dto.ProjectRequest
 import com.dygames.bandmates.service.dto.ProjectsResponse
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -9,7 +8,6 @@ import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestHeader
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
@@ -27,10 +25,9 @@ class ProjectController(
 
     @PostMapping
     fun create(
-        @RequestHeader(value = "Authorization") userId: Long,
-        @RequestBody request: ProjectRequest
+        @RequestHeader(value = "Authorization") memberId: Long,
     ): ResponseEntity<Unit> {
-        projectService.create(userId, request)
+        projectService.create(memberId)
         return ResponseEntity.status(HttpStatus.CREATED).build()
     }
 
@@ -44,10 +41,10 @@ class ProjectController(
 
     @PostMapping("/fork/{projectId}")
     fun fork(
-        @RequestHeader(value = "Authorization") userId: Long,
+        @RequestHeader(value = "Authorization") memberId: Long,
         @PathVariable projectId: Long
     ): ResponseEntity<Unit> {
-        projectService.fork(userId, projectId)
+        projectService.fork(memberId, projectId)
         return ResponseEntity.status(HttpStatus.CREATED).build()
     }
 }

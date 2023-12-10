@@ -4,12 +4,12 @@ import com.dygames.bandmates.domain.project.Project
 
 data class ProjectRequest(
     val id: Long,
-    val author: UserRequest
+    val author: MemberRequest
 ) {
     companion object {
         fun of(project: Project) = ProjectRequest(
             project.id,
-            UserRequest.of(project.author)
+            MemberRequest.of(project.author)
         )
     }
 }

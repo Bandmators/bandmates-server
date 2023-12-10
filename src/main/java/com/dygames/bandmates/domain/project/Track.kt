@@ -13,6 +13,6 @@ class Track(
     val audio: Audio,
 
     @OneToOne
-    @JoinColumn(name = "USER_ID")
-    val author: User
+    @JoinColumn(name = "MEMBER_ID")
+    val author: Member
 ) : BaseEntity()

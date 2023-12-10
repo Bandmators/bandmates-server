@@ -2,7 +2,7 @@ package com.dygames.bandmates.controller
 
 import com.dygames.bandmates.domain.project.Project
 import com.dygames.bandmates.domain.project.Tracks
-import com.dygames.bandmates.domain.project.User
+import com.dygames.bandmates.domain.project.Member
 import com.dygames.bandmates.service.ProjectService
 import com.dygames.bandmates.service.dto.ProjectRequest
 import com.dygames.bandmates.service.dto.ProjectsResponse
@@ -32,7 +32,7 @@ class ProjectControllerTest {
 
     @Test
     fun 모든_프로젝트를_가져온다() {
-        val sut = Project(User("", ""), User("", ""), Tracks(emptyList()))
+        val sut = Project(Member("", ""), Member("", ""), Tracks(emptyList()))
 
         given(projectService.findAll())
             .willReturn(
@@ -50,7 +50,7 @@ class ProjectControllerTest {
 
     @Test
     fun 프로젝트를_생성한다() {
-        val sut = Project(User("", ""), User("", ""), Tracks(emptyList()))
+        val sut = Project(Member("", ""), Member("", ""), Tracks(emptyList()))
 
         val body: String = ObjectMapper().writeValueAsString(
             ProjectRequest.of(sut)
@@ -66,7 +66,7 @@ class ProjectControllerTest {
 
     @Test
     fun 프로젝트를_포크한다() {
-        val sut = Project(User("", ""), User("", ""), Tracks(emptyList()))
+        val sut = Project(Member("", ""), Member("", ""), Tracks(emptyList()))
 
         val body: String = ObjectMapper().writeValueAsString(
             ProjectRequest.of(sut)
