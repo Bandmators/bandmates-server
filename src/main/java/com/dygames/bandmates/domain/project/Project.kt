@@ -8,6 +8,7 @@ import jakarta.persistence.ManyToOne
 
 @Entity
 class Project(
+
     @ManyToOne
     @JoinColumn(name = "AUTHOR_ID")
     val author: Member,
@@ -18,11 +19,21 @@ class Project(
 
     @Embedded
     @JoinColumn(name = "TRACKS_ID")
-    val tracks: Tracks
-) : BaseEntity() {
+    val tracks: Tracks,
+
+    val originId: Long = 0,
+    id: Long = 0
+) : BaseEntity(id) {
+
     fun fork(newOwner: Member): Project {
         return Project(
-            author, newOwner, tracks
+            author, newOwner, tracks, id
+        )
+    }
+
+    fun contribute(project: Project): Project {
+        return Project(
+            author, author, tracks.merge(project.tracks), id, id
         )
     }
 }

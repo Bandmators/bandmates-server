@@ -24,6 +24,7 @@ class ProjectService(
     @Transactional
     fun create(memberId: Long): ProjectResponse {
         val author = memberRepository.findById(memberId).get()
+
         val project = Project(
             author = author, owner = author, tracks = Tracks(emptyList())
         )
@@ -34,8 +35,8 @@ class ProjectService(
     }
 
     @Transactional
-    fun delete(id: Long) {
-        projectRepository.deleteById(id)
+    fun delete(projectId: Long) {
+        projectRepository.deleteById(projectId)
     }
 
     @Transactional
@@ -47,6 +48,18 @@ class ProjectService(
 
         return ProjectResponse.of(
             projectRepository.save(forkedProject)
+        )
+    }
+
+    @Transactional
+    fun contribute(memberId: Long, projectId: Long): ProjectResponse {
+        val project = projectRepository.findById(projectId).get()
+        val originProject = projectRepository.findById(project.originId).get()
+
+        val contributedProject = originProject.contribute(project)
+
+        return ProjectResponse.of(
+            projectRepository.save(contributedProject)
         )
     }
 }
