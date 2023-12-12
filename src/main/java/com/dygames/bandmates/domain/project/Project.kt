@@ -31,7 +31,7 @@ class Project(
         )
     }
 
-    fun contribute(project: Project): Project {
+    fun merge(project: Project): Project {
         return Project(
             author, author, tracks.merge(project.tracks), id, id
         )

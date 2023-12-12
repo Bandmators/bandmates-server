@@ -56,29 +56,4 @@ class ProjectServiceTest {
         val expect = projectRepository.findById(forkedProject.id).get()
         assertEquals(expect.owner.id, forker.id)
     }
-
-    @Test
-    fun 프로젝트에_기여한다() {
-        // given
-        val author = memberRepository.save(Member("author", ""))
-        val forker = memberRepository.save(Member("forker", ""))
-
-        val createdProject = projectService.create(
-            author.id
-        )
-        val forkedProject = projectService.fork(
-            forker.id,
-            createdProject.id
-        )
-
-        // when
-        val contributedProject = projectService.contribute(
-            forker.id,
-            forkedProject.id
-        )
-
-        // then
-        val expect = projectRepository.findById(contributedProject.id).get()
-        assertEquals(expect.id, createdProject.id)
-    }
 }

@@ -6,13 +6,14 @@ import com.dygames.bandmates.domain.project.repository.MemberRepository
 import com.dygames.bandmates.domain.project.repository.ProjectRepository
 import com.dygames.bandmates.service.dto.ProjectResponse
 import com.dygames.bandmates.service.dto.ProjectsResponse
+import jakarta.transaction.Transactional
 import org.springframework.stereotype.Service
-import org.springframework.transaction.annotation.Transactional
 
 @Transactional
 @Service
 class ProjectService(
-    private val projectRepository: ProjectRepository, private val memberRepository: MemberRepository
+    private val projectRepository: ProjectRepository,
+    private val memberRepository: MemberRepository
 ) {
 
     @Transactional
@@ -56,7 +57,7 @@ class ProjectService(
         val project = projectRepository.findById(projectId).get()
         val originProject = projectRepository.findById(project.originId).get()
 
-        val contributedProject = originProject.contribute(project)
+        val contributedProject = originProject.merge(project)
 
         return ProjectResponse.of(
             projectRepository.save(contributedProject)

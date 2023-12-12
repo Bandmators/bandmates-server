@@ -8,7 +8,7 @@ data class ProjectResponse(
     val tracks: TracksResponse
 ) {
     companion object {
-        fun of(project: Project) =ProjectResponse(
+        fun of(project: Project) = ProjectResponse(
             project.id,
             project.author.name,
             TracksResponse.of(project.tracks)
