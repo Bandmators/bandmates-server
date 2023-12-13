@@ -11,7 +11,7 @@ data class ContributeResponse(
     companion object {
         fun of(contribute: Contribute) = ContributeResponse(
             contribute.id,
-            contribute.requester.name,
+            contribute.origin.author.name,
             ProjectResponse.of(contribute.origin),
             ProjectResponse.of(contribute.forked)
         )

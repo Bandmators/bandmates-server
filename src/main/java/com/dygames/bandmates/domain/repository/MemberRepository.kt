@@ -1,4 +1,4 @@
-package com.dygames.bandmates.domain.project.repository
+package com.dygames.bandmates.domain.repository
 
 import com.dygames.bandmates.domain.project.Member
 

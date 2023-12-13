@@ -1,11 +1,11 @@
 package com.dygames.bandmates.domain
 
-import com.dygames.bandmates.domain.project.repository.BaseRepository
+import com.dygames.bandmates.domain.repository.BaseRepository
 import java.util.Optional
 
 open class FakeRepository<T : BaseEntity> : BaseRepository<T, Long> {
     private var lastId = 0
-    private val entities: MutableList<T> = mutableListOf()
+    protected val entities: MutableList<T> = mutableListOf()
 
     override fun <S : T> save(entity: S): S {
         entities.add(entity)

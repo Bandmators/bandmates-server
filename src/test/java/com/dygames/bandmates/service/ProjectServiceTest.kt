@@ -1,8 +1,8 @@
 package com.dygames.bandmates.service
 
 import com.dygames.bandmates.domain.project.Member
-import com.dygames.bandmates.domain.project.repository.MemberRepository
-import com.dygames.bandmates.domain.project.repository.ProjectRepository
+import com.dygames.bandmates.domain.repository.MemberRepository
+import com.dygames.bandmates.domain.repository.ProjectRepository
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -32,8 +32,8 @@ class ProjectServiceTest {
         )
 
         // then
-        val expect = projectRepository.findById(createdProject.id).get()
-        assertEquals(expect.author.id, author.id)
+        val expected = projectRepository.findById(createdProject.id).get()
+        assertEquals(expected.author.id, author.id)
     }
 
     @Test
@@ -53,7 +53,7 @@ class ProjectServiceTest {
         )
 
         // then
-        val expect = projectRepository.findById(forkedProject.id).get()
-        assertEquals(expect.owner.id, forker.id)
+        val expected = projectRepository.findById(forkedProject.id).get()
+        assertEquals(expected.owner.id, forker.id)
     }
 }

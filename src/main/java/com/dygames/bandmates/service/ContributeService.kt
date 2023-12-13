@@ -2,10 +2,11 @@ package com.dygames.bandmates.service
 
 import com.dygames.bandmates.domain.contribute.Contribute
 import com.dygames.bandmates.domain.contribute.ContributeState
-import com.dygames.bandmates.domain.contribute.repository.ContributeRepository
-import com.dygames.bandmates.domain.project.repository.MemberRepository
-import com.dygames.bandmates.domain.project.repository.ProjectRepository
+import com.dygames.bandmates.domain.repository.ContributeRepository
+import com.dygames.bandmates.domain.repository.MemberRepository
+import com.dygames.bandmates.domain.repository.ProjectRepository
 import com.dygames.bandmates.service.dto.ContributeResponse
+import com.dygames.bandmates.service.dto.ContributesResponse
 import jakarta.transaction.Transactional
 import org.springframework.stereotype.Service
 
@@ -18,16 +19,37 @@ class ContributeService(
 ) {
 
     @Transactional
+    fun findById(memberId: Long, contributeId: Long): ContributeResponse {
+        val contribute = contributeRepository.findById(contributeId).get()
+
+        return ContributeResponse.of(contribute)
+    }
+
+    @Transactional
+    fun findAllRequest(memberId: Long): ContributesResponse {
+        val member = memberRepository.findById(memberId).get()
+
+        return ContributesResponse.of(
+            contributeRepository.findAllByForkedOwner(member)
+        )
+    }
+
+    @Transactional
+    fun findAllRequested(memberId: Long): ContributesResponse {
+        val member = memberRepository.findById(memberId).get()
+
+        return ContributesResponse.of(
+            contributeRepository.findAllByOriginOwner(member)
+        )
+    }
+
+    @Transactional
     fun request(memberId: Long, projectId: Long): ContributeResponse {
-        val requester = memberRepository.findById(memberId).get()
         val project = projectRepository.findById(projectId).get()
         val originProject = projectRepository.findById(project.originId).get()
 
         val contribute = Contribute(
-            requester,
-            originProject,
-            project,
-            ContributeState.OPEN
+            originProject, project, ContributeState.OPEN
         )
 
         return ContributeResponse.of(

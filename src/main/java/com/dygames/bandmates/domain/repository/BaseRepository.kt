@@ -1,4 +1,4 @@
-package com.dygames.bandmates.domain.project.repository
+package com.dygames.bandmates.domain.repository
 
 import org.springframework.data.repository.CrudRepository
 import org.springframework.data.repository.NoRepositoryBean

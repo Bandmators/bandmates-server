@@ -2,8 +2,8 @@ package com.dygames.bandmates.service
 
 import com.dygames.bandmates.domain.project.Project
 import com.dygames.bandmates.domain.project.Tracks
-import com.dygames.bandmates.domain.project.repository.MemberRepository
-import com.dygames.bandmates.domain.project.repository.ProjectRepository
+import com.dygames.bandmates.domain.repository.MemberRepository
+import com.dygames.bandmates.domain.repository.ProjectRepository
 import com.dygames.bandmates.service.dto.ProjectResponse
 import com.dygames.bandmates.service.dto.ProjectsResponse
 import jakarta.transaction.Transactional
@@ -23,6 +23,19 @@ class ProjectService(
     }
 
     @Transactional
+    fun findAllByMemberId(memberId: Long): ProjectsResponse {
+        val member = memberRepository.findById(memberId).get()
+        val projects = projectRepository.findAllByOwner(member)
+        return ProjectsResponse.of(projects)
+    }
+
+    @Transactional
+    fun findById(projectId: Long): ProjectResponse {
+        val project = projectRepository.findById(projectId).get()
+        return ProjectResponse.of(project)
+    }
+
+    @Transactional
     fun create(memberId: Long): ProjectResponse {
         val author = memberRepository.findById(memberId).get()
 
@@ -36,7 +49,7 @@ class ProjectService(
     }
 
     @Transactional
-    fun delete(projectId: Long) {
+    fun delete(memberId: Long, projectId: Long) {
         projectRepository.deleteById(projectId)
     }
 
@@ -49,18 +62,6 @@ class ProjectService(
 
         return ProjectResponse.of(
             projectRepository.save(forkedProject)
-        )
-    }
-
-    @Transactional
-    fun contribute(memberId: Long, projectId: Long): ProjectResponse {
-        val project = projectRepository.findById(projectId).get()
-        val originProject = projectRepository.findById(project.originId).get()
-
-        val contributedProject = originProject.merge(project)
-
-        return ProjectResponse.of(
-            projectRepository.save(contributedProject)
         )
     }
 }

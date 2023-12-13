@@ -33,9 +33,10 @@ class ProjectController(
 
     @DeleteMapping("/{projectId}")
     fun delete(
+        @RequestHeader(value = "Authorization") memberId: Long,
         @PathVariable projectId: Long,
     ): ResponseEntity<Unit> {
-        projectService.delete(projectId)
+        projectService.delete(memberId, projectId)
         return ResponseEntity.ok().build()
     }
 
