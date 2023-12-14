@@ -1,8 +1,8 @@
 package com.dygames.bandmates.controller
 
-import com.dygames.bandmates.domain.project.Member
+import com.dygames.bandmates.domain.member.Member
 import com.dygames.bandmates.domain.project.Project
-import com.dygames.bandmates.domain.project.Tracks
+import com.dygames.bandmates.domain.track.Tracks
 import com.dygames.bandmates.service.ProjectService
 import com.dygames.bandmates.service.dto.ProjectRequest
 import com.dygames.bandmates.service.dto.ProjectResponse

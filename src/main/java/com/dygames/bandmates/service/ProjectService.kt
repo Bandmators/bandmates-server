@@ -1,7 +1,7 @@
 package com.dygames.bandmates.service
 
 import com.dygames.bandmates.domain.project.Project
-import com.dygames.bandmates.domain.project.Tracks
+import com.dygames.bandmates.domain.track.Tracks
 import com.dygames.bandmates.domain.repository.MemberRepository
 import com.dygames.bandmates.domain.repository.ProjectRepository
 import com.dygames.bandmates.service.dto.ProjectResponse

@@ -1,6 +1,6 @@
 package com.dygames.bandmates.service
 
-import com.dygames.bandmates.domain.project.Member
+import com.dygames.bandmates.domain.member.Member
 import com.dygames.bandmates.domain.repository.MemberRepository
 import com.dygames.bandmates.domain.repository.ProjectRepository
 import org.junit.jupiter.api.Assertions.assertEquals

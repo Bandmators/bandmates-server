@@ -1,7 +1,7 @@
 package com.dygames.bandmates.domain.repository
 
 import com.dygames.bandmates.domain.contribute.Contribute
-import com.dygames.bandmates.domain.project.Member
+import com.dygames.bandmates.domain.member.Member
 
 interface ContributeRepository : BaseRepository<Contribute, Long> {
     fun findAllByOriginOwner(member: Member): List<Contribute>

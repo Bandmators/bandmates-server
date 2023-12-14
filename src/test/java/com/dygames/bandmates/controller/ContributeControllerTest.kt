@@ -2,9 +2,9 @@ package com.dygames.bandmates.controller
 
 import com.dygames.bandmates.domain.contribute.Contribute
 import com.dygames.bandmates.domain.contribute.ContributeState
-import com.dygames.bandmates.domain.project.Member
+import com.dygames.bandmates.domain.member.Member
 import com.dygames.bandmates.domain.project.Project
-import com.dygames.bandmates.domain.project.Tracks
+import com.dygames.bandmates.domain.track.Tracks
 import com.dygames.bandmates.service.ContributeService
 import com.dygames.bandmates.service.dto.ContributeResponse
 import org.junit.jupiter.api.Test

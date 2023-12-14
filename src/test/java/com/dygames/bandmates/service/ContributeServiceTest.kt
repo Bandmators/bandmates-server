@@ -2,9 +2,9 @@ package com.dygames.bandmates.service
 
 import com.dygames.bandmates.domain.contribute.Contribute
 import com.dygames.bandmates.domain.contribute.ContributeState
-import com.dygames.bandmates.domain.project.Member
+import com.dygames.bandmates.domain.member.Member
 import com.dygames.bandmates.domain.project.Project
-import com.dygames.bandmates.domain.project.Tracks
+import com.dygames.bandmates.domain.track.Tracks
 import com.dygames.bandmates.domain.repository.ContributeRepository
 import com.dygames.bandmates.domain.repository.MemberRepository
 import com.dygames.bandmates.domain.repository.ProjectRepository

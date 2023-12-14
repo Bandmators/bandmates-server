@@ -1,6 +1,6 @@
 package com.dygames.bandmates.service.dto
 
-import com.dygames.bandmates.domain.project.Tracks
+import com.dygames.bandmates.domain.track.Tracks
 
 data class TracksResponse(
     val value: List<TrackResponse>

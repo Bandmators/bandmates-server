@@ -1,4 +1,4 @@
-package com.dygames.bandmates.domain.project
+package com.dygames.bandmates.domain.member
 
 import com.dygames.bandmates.domain.BaseEntity
 import jakarta.persistence.Entity

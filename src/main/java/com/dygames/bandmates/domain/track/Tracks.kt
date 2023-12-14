@@ -1,4 +1,4 @@
-package com.dygames.bandmates.domain.project
+package com.dygames.bandmates.domain.track
 
 import jakarta.persistence.Embeddable
 import jakarta.persistence.OneToMany

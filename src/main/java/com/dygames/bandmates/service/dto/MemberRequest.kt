@@ -1,6 +1,6 @@
 package com.dygames.bandmates.service.dto
 
-import com.dygames.bandmates.domain.project.Member
+import com.dygames.bandmates.domain.member.Member
 
 data class MemberRequest(
     val id: Long,

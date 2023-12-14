@@ -1,6 +1,8 @@
 package com.dygames.bandmates.domain.project
 
 import com.dygames.bandmates.domain.BaseEntity
+import com.dygames.bandmates.domain.member.Member
+import com.dygames.bandmates.domain.track.Tracks
 import jakarta.persistence.Embedded
 import jakarta.persistence.Entity
 import jakarta.persistence.JoinColumn

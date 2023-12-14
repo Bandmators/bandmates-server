@@ -1,6 +1,6 @@
 package com.dygames.bandmates.service.dto
 
-import com.dygames.bandmates.domain.project.Track
+import com.dygames.bandmates.domain.track.Track
 
 data class TrackResponse(
     val id: Long

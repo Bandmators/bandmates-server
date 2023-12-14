@@ -1,4 +1,4 @@
-package com.dygames.bandmates.domain.audio
+package com.dygames.bandmates.domain.track.audio
 
 import jakarta.persistence.DiscriminatorValue
 import jakarta.persistence.Entity
