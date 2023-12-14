@@ -19,7 +19,7 @@ class ContributeService(
 ) {
 
     @Transactional
-    fun findById(memberId: Long, contributeId: Long): ContributeResponse {
+    fun findById(memberId: Long, projectId: Long, contributeId: Long): ContributeResponse {
         val contribute = contributeRepository.findById(contributeId).get()
 
         return ContributeResponse.of(contribute)

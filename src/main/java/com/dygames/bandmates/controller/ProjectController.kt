@@ -1,6 +1,7 @@
 package com.dygames.bandmates.controller
 
 import com.dygames.bandmates.service.ProjectService
+import com.dygames.bandmates.service.dto.ProjectResponse
 import com.dygames.bandmates.service.dto.ProjectsResponse
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -13,14 +14,26 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping("/projects")
+@RequestMapping("{memberId}/projects")
 class ProjectController(
     private val projectService: ProjectService
 ) {
 
     @GetMapping
-    fun findAll(): ResponseEntity<ProjectsResponse> {
-        return ResponseEntity.ok().body(projectService.findAll())
+    fun findAllByMemberId(
+        @PathVariable memberId: Long
+    ): ResponseEntity<ProjectsResponse> {
+        val projects = projectService.findAllByMemberId(memberId)
+        return ResponseEntity.ok().body(projects)
+    }
+
+    @GetMapping("/{projectId}")
+    fun findById(
+        @RequestHeader(value = "Authorization") memberId: Long,
+        projectId: Long
+    ): ResponseEntity<ProjectResponse> {
+        val project = projectService.findById(projectId)
+        return ResponseEntity.ok().body(project)
     }
 
     @PostMapping

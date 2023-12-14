@@ -17,12 +17,6 @@ class ProjectService(
 ) {
 
     @Transactional
-    fun findAll(): ProjectsResponse {
-        val projects = projectRepository.findAll()
-        return ProjectsResponse.of(projects.toList())
-    }
-
-    @Transactional
     fun findAllByMemberId(memberId: Long): ProjectsResponse {
         val member = memberRepository.findById(memberId).get()
         val projects = projectRepository.findAllByOwner(member)
