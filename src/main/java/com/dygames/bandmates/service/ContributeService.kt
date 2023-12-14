@@ -5,6 +5,7 @@ import com.dygames.bandmates.domain.contribute.ContributeState
 import com.dygames.bandmates.domain.repository.ContributeRepository
 import com.dygames.bandmates.domain.repository.MemberRepository
 import com.dygames.bandmates.domain.repository.ProjectRepository
+import com.dygames.bandmates.service.dto.ContributeRequest
 import com.dygames.bandmates.service.dto.ContributeResponse
 import com.dygames.bandmates.service.dto.ContributesResponse
 import jakarta.transaction.Transactional
@@ -19,15 +20,15 @@ class ContributeService(
 ) {
 
     @Transactional
-    fun findById(memberId: Long, projectId: Long, contributeId: Long): ContributeResponse {
+    fun findById(projectId: Long, contributeId: Long): ContributeResponse {
         val contribute = contributeRepository.findById(contributeId).get()
 
         return ContributeResponse.of(contribute)
     }
 
     @Transactional
-    fun findAllRequest(memberId: Long): ContributesResponse {
-        val member = memberRepository.findById(memberId).get()
+    fun findAllRequest(request: ContributeRequest): ContributesResponse {
+        val member = memberRepository.findById(request.memberId).get()
 
         return ContributesResponse.of(
             contributeRepository.findAllByForkedOwner(member)
@@ -35,8 +36,8 @@ class ContributeService(
     }
 
     @Transactional
-    fun findAllRequested(memberId: Long): ContributesResponse {
-        val member = memberRepository.findById(memberId).get()
+    fun findAllRequested(request: ContributeRequest): ContributesResponse {
+        val member = memberRepository.findById(request.memberId).get()
 
         return ContributesResponse.of(
             contributeRepository.findAllByOriginOwner(member)

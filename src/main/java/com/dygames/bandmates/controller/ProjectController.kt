@@ -9,19 +9,20 @@ import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestHeader
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping("{memberId}/projects")
+@RequestMapping("projects")
 class ProjectController(
     private val projectService: ProjectService
 ) {
 
     @GetMapping
     fun findAllByMemberId(
-        @PathVariable memberId: Long
+        @RequestBody memberId: Long,
     ): ResponseEntity<ProjectsResponse> {
         val projects = projectService.findAllByMemberId(memberId)
         return ResponseEntity.ok().body(projects)
@@ -29,8 +30,7 @@ class ProjectController(
 
     @GetMapping("/{projectId}")
     fun findById(
-        @RequestHeader(value = "Authorization") memberId: Long,
-        projectId: Long
+        @PathVariable projectId: Long
     ): ResponseEntity<ProjectResponse> {
         val project = projectService.findById(projectId)
         return ResponseEntity.ok().body(project)

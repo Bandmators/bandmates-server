@@ -1,11 +1,11 @@
 package com.dygames.bandmates.controller
 
+import com.dygames.bandmates.domain.project.Member
 import com.dygames.bandmates.domain.project.Project
 import com.dygames.bandmates.domain.project.Tracks
-import com.dygames.bandmates.domain.project.Member
 import com.dygames.bandmates.service.ProjectService
 import com.dygames.bandmates.service.dto.ProjectRequest
-import com.dygames.bandmates.service.dto.ProjectsResponse
+import com.dygames.bandmates.service.dto.ProjectResponse
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.junit.jupiter.api.Test
 import org.mockito.BDDMockito.given
@@ -31,21 +31,19 @@ class ProjectControllerTest {
     private lateinit var projectService: ProjectService
 
     @Test
-    fun 모든_프로젝트를_가져온다() {
-        val sut = Project(Member("", ""), Member("", ""), Tracks(emptyList()))
+    fun 유저의_특정_프로젝트를_가져온다() {
+        val sut = Project(Member("", ""), Member("", ""), Tracks(emptyList()), 1, 1)
 
-        given(projectService.findAll())
+        given(projectService.findById(1))
             .willReturn(
-                ProjectsResponse.of(
-                    listOf(sut)
-                )
+                ProjectResponse.of(sut)
             )
 
-        mvc.perform(get("/projects"))
+        mvc.perform(get("/projects/1"))
             .andExpect(status().isOk)
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-            .andExpect(jsonPath("$.value[0].id").value("0"))
-            .andExpect(jsonPath("$.value[0].author").value(""))
+            .andExpect(jsonPath("$.id").value("1"))
+            .andExpect(jsonPath("$.author").value(""))
     }
 
     @Test
