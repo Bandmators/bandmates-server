@@ -9,4 +9,6 @@ import jakarta.persistence.InheritanceType
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "audio_type")
-abstract class Audio : BaseEntity()
+abstract class Audio(
+    val path: String
+) : BaseEntity()

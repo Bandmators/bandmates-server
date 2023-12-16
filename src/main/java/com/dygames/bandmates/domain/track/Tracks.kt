@@ -11,4 +11,8 @@ class Tracks(
     fun merge(tracks: Tracks): Tracks {
         return Tracks(this.tracks + tracks.tracks)
     }
+
+    fun addTrack(track: Track): Tracks {
+        return Tracks(tracks + track)
+    }
 }

@@ -5,4 +5,6 @@ import jakarta.persistence.Entity
 
 @Entity
 @DiscriminatorValue("Wave")
-class WaveAudio : Audio()
+class WaveAudio(
+    path: String
+) : Audio(path)

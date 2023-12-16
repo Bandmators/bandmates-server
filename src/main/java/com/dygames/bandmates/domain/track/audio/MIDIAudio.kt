@@ -5,4 +5,6 @@ import jakarta.persistence.Entity
 
 @Entity
 @DiscriminatorValue("MIDI")
-class MIDIAudio : Audio()
+class MIDIAudio(
+    path: String
+) : Audio(path)

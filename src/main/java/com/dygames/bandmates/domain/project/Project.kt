@@ -2,6 +2,7 @@ package com.dygames.bandmates.domain.project
 
 import com.dygames.bandmates.domain.BaseEntity
 import com.dygames.bandmates.domain.member.Member
+import com.dygames.bandmates.domain.track.Track
 import com.dygames.bandmates.domain.track.Tracks
 import jakarta.persistence.Embedded
 import jakarta.persistence.Entity
@@ -36,6 +37,12 @@ class Project(
     fun merge(project: Project): Project {
         return Project(
             author, author, tracks.merge(project.tracks), id, id
+        )
+    }
+
+    fun addTrack(track: Track): Project {
+        return Project(
+            author, author, tracks.addTrack(track), id, id
         )
     }
 }
